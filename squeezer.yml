@@ -1,0 +1,35 @@
+name: dapp-demo
+
+runtime: nodejs
+runtimeVersion: "8.10"
+
+vars:
+  accessKey: 6480b869fe481acacb58d3d8b8dc1e62a93d900680f24a9a8c007f6d1cba
+  stages:
+    local:
+      chainkit:
+        itnUrl: /v1/itn/callback
+        environment: test
+      response-http-headers:
+        Access-Control-Allow-Origin: "*"
+        Access-Control-Allow-Headers: "Authorization,Content-Type"
+    dev:
+      chainkit:
+        itnUrl: /v1/itn/callback
+        environment: test
+      response-http-headers:
+        Access-Control-Allow-Origin: "*"
+        Access-Control-Allow-Headers: "Authorization,Content-Type"
+    prod:
+      chainkit:
+        itnUrl: /v1/itn/callback
+        environment: live
+      response-http-headers:
+        Access-Control-Allow-Origin: "http://example.org"
+
+plugins:
+  - squeezer-serve
+  - squeezer-swagger
+  - squeezer-chainkit-plugin
+
+swagger: !!inc/file "swagger.yml"
